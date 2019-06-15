@@ -1,0 +1,12 @@
+{
+  "kodi": "IP/FQDN KODI STATION",
+  "skip_list": ["DIRECTORIES", "TO", "EXCLUDE", "FROM", "SCANNING", "FOR", "CONTENT"],
+  "media_location": "MOUNTPOINT",
+  "incoming_location": "FULL PATH TO FOLDER CONTAINING NEW CONTENT",
+  "mail_from": "FROM EMAIL",
+  "mail_to": "TO EMAIL",
+  "mail_subject": "MAIL SUBJECT",
+  "mail_smtp": "SMTP SERVER",
+  "telegram_token" : "TELEGRAM TOKEN OF BOT",
+  "telegram_chat_id": "TELEGRAM CHANNELID OF BOT"
+}
