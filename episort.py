@@ -19,30 +19,30 @@ def check_mount():
     print('%s not found.  Please check.  ' % env['incoming_location'])
     sys.exit()
 
-def reportmove(result):
-  body = '' 
-  for r in result:
-    body = body + r + '\n'
-  # Import smtplib for the actual sending function
-  import smtplib
+# def reportmove(result):
+#   body = ''
+#   for r in result:
+#     body = body + r + '\n'
+#   # Import smtplib for the actual sending function
+#   import smtplib
 
-  # Import the email modules we'll need
-  from email.mime.text import MIMEText
+#   # Import the email modules we'll need
+#   from email.mime.text import MIMEText
 
-  # Create a text/plain message
-  msg = MIMEText(body)
+#   # Create a text/plain message
+#   msg = MIMEText(body)
 
-  # me == the sender's email address
-  # you == the recipient's email address
-  msg['Subject'] = env['mail_subject']
-  msg['From'] = env['mail_from']
-  msg['To'] = env['mail_to']
+#   # me == the sender's email address
+#   # you == the recipient's email address
+#   msg['Subject'] = env['mail_subject']
+#   msg['From'] = env['mail_from']
+#   msg['To'] = env['mail_to']
 
-  # Send the message via our own SMTP server, but don't include the
-  # envelope header.
-  s = smtplib.SMTP(env['mail_smtp'])
-  s.sendmail(msg['From'], msg['To'], msg.as_string())
-  s.quit()
+#   # Send the message via our own SMTP server, but don't include the
+#   # envelope header.
+#   s = smtplib.SMTP(env['mail_smtp'])
+#   s.sendmail(msg['From'], msg['To'], msg.as_string())
+#   s.quit()
 
 def fetchfiles():
   if os.path.ismount(env["media_location"]) and os.path.isdir(env["media_location"]):
@@ -90,7 +90,7 @@ def ProcessFiles(l_dirs):
     if re.search(r'[sS]\d{1,2}[eE]\d{1,2}', l):
       if not 'Series' in moveddirs:
         moveddirs['Series'] = []
-      root = env["media_location"] + '/Series/' 
+      root = env["media_location"] + '/Series/'
       resultlist = moveddirs['Series']
       wb = {}
       params = re.match(r'(?P<show>[a-zA-Z0-9\.]*)\.[sS](?P<season>\d{1,2})[eE](?P<episode>\d{1,2})',l)
@@ -122,7 +122,7 @@ def ProcessFiles(l_dirs):
     except OSError as why:
       print("ERROR: move of %s failed: \n %s" % (l, why))
       continue
-    #fetchsubs(location)
+  # fetchsubs(location)
   return(moveddirs)
 
 def check_ping(target):
@@ -166,6 +166,5 @@ if __name__ == '__main__':
   check_mount()
   #fetchsubs()
   result = ProcessFiles(fetchfiles())
-  updateKodi()
-  pprint(result)
+  #updateKodi()
   TeleMeStuff(result)
