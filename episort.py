@@ -19,31 +19,6 @@ def check_mount():
     print('%s not found.  Please check.  ' % env['incoming_location'])
     sys.exit()
 
-# def reportmove(result):
-#   body = ''
-#   for r in result:
-#     body = body + r + '\n'
-#   # Import smtplib for the actual sending function
-#   import smtplib
-
-#   # Import the email modules we'll need
-#   from email.mime.text import MIMEText
-
-#   # Create a text/plain message
-#   msg = MIMEText(body)
-
-#   # me == the sender's email address
-#   # you == the recipient's email address
-#   msg['Subject'] = env['mail_subject']
-#   msg['From'] = env['mail_from']
-#   msg['To'] = env['mail_to']
-
-#   # Send the message via our own SMTP server, but don't include the
-#   # envelope header.
-#   s = smtplib.SMTP(env['mail_smtp'])
-#   s.sendmail(msg['From'], msg['To'], msg.as_string())
-#   s.quit()
-
 def fetchfiles():
   if os.path.ismount(env["media_location"]) and os.path.isdir(env["media_location"]):
     l_candidates = os.listdir(env["incoming_location"])
@@ -119,6 +94,7 @@ def ProcessFiles(l_dirs):
     resultlist.append('%s // (%s)' % (l,modifieddate))
     try:
       shutil.move(env["incoming_location"] + '/' + l,location)
+      pass
     except OSError as why:
       print("ERROR: move of %s failed: \n %s" % (l, why))
       continue
@@ -164,7 +140,33 @@ def TeleMeStuff(msg):
 if __name__ == '__main__':
   env = fill_environment()
   check_mount()
-  #fetchsubs()
+  # fetchsubs()
   result = ProcessFiles(fetchfiles())
-  #updateKodi()
-  TeleMeStuff(result)
+#  updateKodi()
+#  TeleMeStuff(result)
+
+
+# def reportmove(result):
+#   body = ''
+#   for r in result:
+#     body = body + r + '\n'
+#   # Import smtplib for the actual sending function
+#   import smtplib
+
+#   # Import the email modules we'll need
+#   from email.mime.text import MIMEText
+
+#   # Create a text/plain message
+#   msg = MIMEText(body)
+
+#   # me == the sender's email address
+#   # you == the recipient's email address
+#   msg['Subject'] = env['mail_subject']
+#   msg['From'] = env['mail_from']
+#   msg['To'] = env['mail_to']
+
+#   # Send the message via our own SMTP server, but don't include the
+#   # envelope header.
+#   s = smtplib.SMTP(env['mail_smtp'])
+#   s.sendmail(msg['From'], msg['To'], msg.as_string())
+#   s.quit()
