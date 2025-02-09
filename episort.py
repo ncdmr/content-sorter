@@ -68,7 +68,7 @@ def ProcessFiles(l_dirs):
       root = env["media_location"] + '/Series/'
       resultlist = moveddirs['Series']
       wb = {}
-      params = re.match(r'(?P<show>[a-zA-Z0-9\.]*)\.[sS](?P<season>\d{1,2})[eE](?P<episode>\d{1,2})',l)
+      params = re.match(r'(?P<show>[a-zA-Z0-9\.\s]*)[sS](?P<season>\d{1,2})[eE](?P<episode>\d{1,2})',l)
       wb = params.groupdict()
       if len(wb['season']) == 1:
         wb['season'] = '0' + wb['season']
